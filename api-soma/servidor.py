@@ -10,11 +10,17 @@ com JSON.
 
 from flask import Flask, request, jsonify
 from functools import wraps
+from dotenv import load_dotenv
+import os
+
+#load_dotenv() le o arquivo .env e tranforma cada variável
+#em uma variavel de sistema para a execucao do programa.
+load_dotenv()
 
 app = Flask(__name__)
 
-#Em producao, isto varia de variavel de ambiente, NUNCA no codigo!
-TOKEN_VALIDO = "segredo-da-turma-123"
+#Leitura de variavel de ambiente
+TOKEN_VALIDO = os.getenv("TOKEN_VALIDO")
 
 def requer_token(funcao):
     @wraps(funcao)
